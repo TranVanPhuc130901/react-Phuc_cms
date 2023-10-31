@@ -1,3 +1,254 @@
 .box_header {
     font-size: 22px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #fff;
+    padding: 1.5rem 0 1.5rem 0;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+}
+
+.box_header .box_header_left {
+    display: flex;
+    align-items: center;
+    gap: 30px
+}
+
+.box_header .icon_header_menu {
+    cursor: pointer;
+}
+
+.box_header .icon_header_menu svg {
+    height: 20px;
+}
+
+.box_header .box_header_left .header_search {
+    display: flex;
+    align-items: center;
+    background: #f8f8f8;
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+
+.box_header .box_header_left .header_search .input_search_header {
+    border: none;
+    outline: none;
+    background: #f8f8f8;
+    padding: 5px 10px;
+}
+
+.box_header .box_header_left .header_search .search_icon {
+    font-size: 17px;
+    border-radius: 10px;
+    color: #d7d7d7;
+    text-align: center;
+    cursor: pointer;
+    background: #f8f8f8;
+    border: none;
+    outline: none;
+}
+
+.box_header .box_header_left .header_search .search_icon:hover {
+    color: #00365a;
+}
+
+.box_header .box_header_right {
+    display: flex;
+    align-items: center;
+    gap: 30px
+}
+
+.box_header .box_header_right .box_menu_settings_header {
+    position: relative;
+}
+
+.box_header .box_header_right .dropdown_menu_header {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    flex-wrap: wrap;
+    width: 240px;
+    padding: 20px;
+    right: -30px;
+    border-radius: 20px;
+}
+
+.box_header .box_header_right .dropdown_menu_header .icon_menu_icon {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: calc(50% - 5px);
+    align-items: center;
+    color: #6d6d6d;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.box_header .box_header_right .btn_setting_menu {
+    font-size: 16px;
+    color: #8f8f8f;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+
+/* Dark light */
+
+.toggleLabel {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.toggleInput {
+    display: none;
+}
+
+.toggleSlider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 10px;
+    transition: 0.4s;
+}
+
+.toggleSlider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.toggleInput:checked+.toggleSlider {
+    background-color: #2196f3;
+}
+
+.toggleInput:checked+.toggleSlider:before {
+    transform: translateX(20px);
+}
+
+
+/* end Dark light */
+
+.box_header .box_header_right .box_notification {
+    position: relative;
+}
+
+.box_header .box_header_right .box_notification .dropdown_notification {
+    position: absolute;
+    width: 260px;
+    padding: 20px;
+    height: 280px;
+    right: -15px;
+    border: 1px solid rgba(58, 58, 58, .15);
+    display: flex;
+    flex-direction: column;
+}
+
+.box_header .box_header_right .box_notification .dropdown_notification .item_dropdown_notification {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(58, 58, 58, .15);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.box_header .box_header_right .box_notification .icon_notification {
+    font-size: 16px;
+    color: #8f8f8f;
+    position: relative;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.box_header .box_header_right .box_notification .icon_notification span {
+    font-size: 9px;
+    color: #00365a;
+    border: 1px solid #00365a;
+    border-radius: 10px;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    text-align: center;
+    font-weight: 700;
+    top: -4px;
+    right: -6px;
+    line-height: 14px;
+}
+
+.box_notification .dropdown_notification .item_dropdown_notification {
+    font-size: 16px;
+}
+
+.box_notification .dropdown_notification .item_dropdown_notification img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.box_notification .dropdown_notification .item_dropdown_notification .time_item_notification {
+    color: #909090;
+    font-size: 14px;
+}
+
+.btn_fullScreen {
+    font-size: 16px;
+    color: #8f8f8f;
+    cursor: pointer;
+}
+
+.box_user {
+    position: relative;
+}
+
+.box_user .user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.box_user .user {
+    color: var(--primary-href);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.box_user .user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.dropdown_user_function {
+    position: absolute;
+    width: 120px;
+    padding: 20px;
+    top: 50px;
+    right: -15px;
+    border: 1px solid rgba(58, 58, 58, .15);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dropdown_user_function .item_user_function {
+    font-size: 16px;
 }

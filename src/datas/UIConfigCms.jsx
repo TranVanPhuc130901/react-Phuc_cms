@@ -1,34 +1,9 @@
 export const UiConfigDataCms = [
-    {id: 1, name: 'Forms', ParentId: 4},
-    {id: 2, name: 'Datatables', ParentId: 4},
-    {id: 3, name: 'Compoments', ParentId: 4},
+   
 ]
 
 export const UiConfigDataSubCms = [
-    {id: 1, name: 'Components', ParentId: 1, class: 'simple-icon-event', icon:"\\e619"},
-    {id: 2, name: 'Layouts', ParentId: 1, class: 'simple-icon-check', icon:"\\e080"},
-    {id: 3, name: 'Validation', ParentId: 1, class: 'simple-icon-magic-wand', icon:"\\e017"},
-    {id: 4, name: 'Wizard', ParentId: 2, class: 'simple-icon-screen-desktop', icon:"\\e011"},
-    {id: 5, name: 'Full Page UI', ParentId: 2, class: 'simple-icon-mouse', icon:"\\e015"},
-    {id: 6, name: 'Scrollable', ParentId: 2, class: 'simple-icon-notebook', icon:"\\e013"},
-    {id: 7, name: 'Pagination', ParentId: 2, class: 'simple-icon-grid', icon:"\\e06a"},
-    {id: 8, name: 'Default', ParentId: 3, class: 'simple-icon-bell', icon:"\\e027"},
-    {id: 8, name: 'Default', ParentId: 3, class: 'simple-icon-bell', icon:"\\e027"},
-    {id: 9, name: 'Alerts', ParentId: 3, class: 'simple-icon-badge', icon:"\\e028"},
-    {id: 1, name: 'Badges', ParentId: 3, class: 'simple-icon-control-play', icon:"\\e071"},
-    {id: 10, name: 'Buttons', ParentId: 3, class: 'simple-icon-layers', icon:"\\e034"},
-    {id: 11, name: 'Cards', ParentId: 3, class: 'simple-icon-picture', icon:"\\e032"},
-    {id: 12, name: 'Carousel', ParentId: 3, class: 'simple-icon-chart', icon:"\\e077"},
-    {id: 13, name: 'Charts', ParentId: 3, class: 'simple-icon-arrow-up', icon:"\\e607"},
-    {id: 14, name: 'Collapse', ParentId: 3, class: 'simple-icon-arrow-down', icon:"\\e604"},
-    {id: 15, name: 'Dropdowns', ParentId: 3, class: 'simple-icon-book-open', icon:"\\e04c"},
-    {id: 16, name: 'Editors', ParentId: 3, class: 'simple-icon-star', icon:"\\e09b"},
-    {id: 17, name: 'Icons', ParentId: 3, class: 'simple-icon-note', icon:"\\e060"},
-    {id: 18, name: 'Input Groups', ParentId: 3, class: 'simple-icon-screen-desktop', icon:"\\e011"},
-    {id: 19, name: 'Jumbotron', ParentId: 3, class: 'simple-icon-docs', icon:"\\e040"},
-    {id: 20, name: 'Modal', ParentId: 3, class: 'simple-icon-cursor', icon:"\\e06e"},
-    {id: 21, name: 'Navigation', ParentId: 3, class: 'simple-icon-cursor', icon:"\\e619"},
-    {id: 22, name: 'Popover & Tooltip', ParentId: 3, class: 'simple-icon-pin', icon:"\\e619"},
-    {id: 23, name: 'Sortable', ParentId: 3, class: 'simple-icon-shuffle', icon:"\\e619"},
-    {id: 24, name: 'Table', ParentId: 3, class: 'simple-icon-grid', icon:"\\e619"},
+    
+    
+    
 ]

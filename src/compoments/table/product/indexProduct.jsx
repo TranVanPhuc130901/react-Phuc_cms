@@ -3,7 +3,7 @@ import StyleProduct from '../../../styles/Product.module.css';
 const IndexProduct = () => {
     return (
         <div className={StyleProduct.containerProduct}>
-            <div className={StyleProduct.head}>
+            <div className="flex justify-between items_center">
                 <div className={StyleProduct.headLeft}>
                     <h1>Product List</h1>
                     <div className={StyleProduct.sortStyle}>

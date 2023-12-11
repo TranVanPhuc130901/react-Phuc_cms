@@ -3,7 +3,6 @@ import StyleProduct from '../../../styles/Product.module.css';
 const IndexProduct = () => {
     return (
         <div className={StyleProduct.containerProduct}>
-            <h1>Product List</h1>
             <div className={StyleProduct.head}>
                 <div className={StyleProduct.headLeft}>
                     <h1>Product List</h1>

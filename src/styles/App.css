@@ -6,3 +6,5 @@
 @import url(/fonts/iconsmind-s/css/iconsminds-ie7.css);
 @import url(/fonts/iconsmind-s/css/iconsminds.css);
 @import url(/fonts/simple-line-icons/css/simple-line-icons.css);
+
+.containerNavbar{display: flex; gap: 10px; align-items: flex-start;}

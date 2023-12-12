@@ -1,11 +1,14 @@
-header{height: 100px;}
+header {
+    height: 100px;
+}
+
 .box_header {
     font-size: 22px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background: #fff;
-    padding: 28px 0;
+    padding: 18px 0;
     box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
 }
 
@@ -17,6 +20,7 @@ header{height: 100px;}
 
 .box_header .icon_header_menu {
     cursor: pointer;
+    display: flex;
 }
 
 .box_header .icon_header_menu svg {

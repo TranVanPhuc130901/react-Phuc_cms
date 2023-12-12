@@ -1,3 +1,14 @@
-.containerProduct .head{display: flex;justify-content: space-between; align-items: center;}
-.containerProduct .sortStyle svg{width: 24px;}
-.containerProduct{width: calc(100% - 230px);}
+.containerProduct .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerProduct .sortStyle svg {
+    width: 24px;
+}
+
+.containerProduct {
+    width: calc(100% - 260px);
+    margin: 0 auto;
+}

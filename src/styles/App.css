@@ -6,9 +6,12 @@
 @import url(/fonts/iconsmind-s/css/iconsminds-ie7.css);
 @import url(/fonts/iconsmind-s/css/iconsminds.css);
 @import url(/fonts/simple-line-icons/css/simple-line-icons.css);
+.containerNavbar {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.containerNavbar{display: flex; gap: 10px; align-items: flex-start;}
+.custom-shadow {
+    box-shadow: 0 1px 15px rgba(0, 0, 0, .04), 0 1px 6px rgba(0, 0, 0, .04);
+}

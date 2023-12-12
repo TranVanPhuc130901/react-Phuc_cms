@@ -7,17 +7,7 @@ import './styles/index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
-    {/* <Router>
-      <MenuTop />
-      <div className='containerNavbar'>
-        <NavbarParent />
-        <Routes>
-        <Route path='/admin' element={<App />} />
-        <Route path='/*' element={<OtherPage />} />
-        </Routes>
-      </div>
-    </Router> */}
-    <App/>
+      <App/>
     </Router>
   </React.StrictMode>
 );

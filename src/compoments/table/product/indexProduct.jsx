@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import StyleProduct from '../../../styles/Product.module.css';
 import Pagination from '../../base/pagination';
 
@@ -48,7 +50,9 @@ const IndexProduct = () => {
                 </div>
                 <div className='flex flex-col gap-[4px] mr-[10px]'>
                     <div className='flex items-center gap-[10px]'>
-                        <button className='rounded-[20px] px-2 text-[#fff] text-xl px-8 py-2 bg-[--primary-light-bluenavy]'>Add new</button>
+                    <Link to="/create">
+                         <button className='rounded-[20px] px-2 text-[#fff] text-xl px-8 py-2 bg-[--primary-light-bluenavy]'>Add new</button>
+                    </Link>
                         <div className='rounded-[20px] px-2 text-[#fff] text-2xl px-8 py-2 bg-[--primary-light-bluenavy]'>
                             <input type="checkbox" name="" id="" />
                         </div>

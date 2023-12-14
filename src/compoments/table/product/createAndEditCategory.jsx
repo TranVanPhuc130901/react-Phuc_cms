@@ -1,17 +1,13 @@
+import DropDownList from "../../base/dropDownList";
 
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-const CreateAndEditProduct = ( ) => {
+const CreateAndEditCategory = () => {
     return (
         <form className="h-[calc(100vh-100px)] overflow-auto w-full">
             <div className="flex flex-col gap-4">
                     <legend className="font-bold text-2xl text-center mt-2">Thông tin cơ bản</legend>
                     <div className="form-group">
                         <label className="control-label col-md-2">Danh mục cha</label>
-                        <div className="col-md-10">
-                            dropdownDanh mục
-                        </div>
+                        <DropDownList/>
                     </div>
                     <div className="flex flex-col gap-3">
                         <label className="font-bold text-xl">Tên bài viết <span></span></label>
@@ -23,50 +19,6 @@ const CreateAndEditProduct = ( ) => {
                         <label className="font-bold text-xl">Mô tả <span></span></label>
                         <div className="w-full">
                             <textarea className="w-full p-2 rounded-[8px] border-[#ced4da]" placeholder="Mô tả" id="txtDescription" rows={4} />   
-                        </div>
-                    </div>
-                    <div className="flex gap-[10px]">
-                        <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">SKU</label>
-                            <div className="w-full">
-                                <input type="text" placeholder="SKU" id="txtSKU" className="w-full p-2 rounded-[8px] border-[#ced4da]"/>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">Giá niêm yết</label>
-                            <div className="col-md-2">
-                                <div className="w-full">
-                                    <input type="number" placeholder="Giá niêm yết" id="txtPrice" className="w-full p-2 rounded-[8px] border-[#ced4da]" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">Giá khuyến mãi</label>
-                            <div className="col-md-2">
-                                <div className="w-full">
-                                    <input  type="number" placeholder="Giá khuyến mãi" id="txtPriceNew" className="w-full p-2 rounded-[8px] border-[#ced4da]" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex gap-[10px]">
-                        <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">Ngày đăng</label>
-                            <div className="w-full">
-                                <input type="Date" className="w-full p-2 rounded-[8px] border-[#ced4da]" placeholder="Ngày đăng" id="txtCreatedDate" />
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">Thứ tự</label>
-                            <div className="w-full">
-                                <input  type="Number" className="w-full p-2 rounded-[8px] border-[#ced4da]" placeholder="Thứ tự" id="txtOrder" />
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">Số lượng tồn</label>
-                            <div className="w-full">
-                                <input type="Number" className="w-full p-2 rounded-[8px] border-[#ced4da]" placeholder="Số lượng tồn" id="txtQuantity" />
-                            </div>
                         </div>
                     </div>
                     <div className="flex gap-[10px]">
@@ -96,28 +48,7 @@ const CreateAndEditProduct = ( ) => {
                         </div>
                     </div>
                 
-                    <legend className="font-bold text-xl">Mô tả chi tiết</legend>
-                    <div className="form-group">
-                        <div className="h-[300px]">
-                        <CKEditor height="300px"
-                            editor={ ClassicEditor }
-                            data="<p>Hello from CKEditor5!</p>"
-                            onReady={ editor => {
-                                // You can store the "editor" and use when it is needed.
-                                console.log( 'Editor is ready to use!', editor );
-                            } }
-                            onChange={ ( event ) => {
-                                console.log( event );
-                            } }
-                            onBlur={ ( event, editor ) => {
-                                console.log( 'Blur.', editor );
-                            } }
-                            onFocus={ ( event, editor ) => {
-                                console.log( 'Focus.', editor );
-                            } }
-                        />
-                        </div>
-                    </div>
+                    
                     <legend className="font-bold text-xl">Tối ưu cho công cụ tìm kiếm</legend>
                     <div className="flex flex-col gap-3">
                         <label className="font-bold text-xl">URL <span></span></label>
@@ -160,4 +91,4 @@ const CreateAndEditProduct = ( ) => {
     )
 }
 
-export default CreateAndEditProduct;
+export default CreateAndEditCategory;

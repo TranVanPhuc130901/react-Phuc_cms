@@ -36,4 +36,12 @@ button {
     outline: none;
 }
 
-input, textarea{border: 1px solid #8f8f8f;outline: none;}
+input,
+textarea {
+    border: 1px solid #8f8f8f;
+    outline: none;
+}
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    height: 250px;
+}

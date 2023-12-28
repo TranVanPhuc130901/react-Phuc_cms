@@ -1,9 +1,26 @@
 import { Link } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
 import StyleProduct from '../../../styles/Product.module.css';
 import Pagination from '../../base/pagination';
+import productService from '../../../services/product';
 
 const IndexProduct = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Call your API function here
+        const data = await productService.getAllProducts();
+        setProducts(data.datas.items);
+        console.log(data.datas.items); // Assuming your API response contains the products
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className={StyleProduct.containerProduct}>
       <div className="flex justify-between items_center border-b-[1px] pb-2">
@@ -96,6 +113,7 @@ const IndexProduct = () => {
       <div className="w-full">
         <div className="flex items-center justify-between mx-4 text-center row">
           <div className="w-1/5 p-2 cell header">Name</div>
+          <div className="w-1/5 p-2 cell header">image</div>
           <div className="w-1/5 p-2 cell header">Category</div>
           <div className="w-1/5 p-2 cell header">Date</div>
           <div className="w-1/5 p-2 cell header">Status</div>
@@ -104,56 +122,19 @@ const IndexProduct = () => {
             <input type="checkbox" />
           </div>
         </div>
-        <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
-          <div className="w-1/5 p-2 cell">Product Name</div>
-          <div className="w-1/5 p-2 cell">Category</div>
-          <div className="w-1/5 p-2 cell">2020-01-01</div>
-          <div className="w-1/5 p-2 cell">Active</div>
-          <div className="p-2 cell w-1/10">action</div>
-          <div className="p-2 cell w-1/10">
-            <input type="checkbox" />
+        {products.map((product) => (
+          <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
+            <div className="w-1/5 p-2 cell">{product.viTitle}</div>
+            <div className="w-1/5 p-2 cell"><img src={product.viImage} alt={product.viTitle} /></div>
+            <div className="w-1/5 p-2 cell">Category</div>
+            <div className="w-1/5 p-2 cell">{product.dateCreated}</div>
+            <div className="w-1/5 p-2 cell">Active</div>
+            <div className="p-2 cell w-1/10">action</div>
+            <div className="p-2 cell w-1/10">
+              <input type="checkbox" />
+            </div>
           </div>
-        </div>
-        <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
-          <div className="w-1/5 p-2 cell">Product Name</div>
-          <div className="w-1/5 p-2 cell">Category</div>
-          <div className="w-1/5 p-2 cell">2020-01-01</div>
-          <div className="w-1/5 p-2 cell">Active</div>
-          <div className="p-2 cell w-1/10">action</div>
-          <div className="p-2 cell w-1/10">
-            <input type="checkbox" />
-          </div>
-        </div>
-        <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
-          <div className="w-1/5 p-2 cell">Product Name</div>
-          <div className="w-1/5 p-2 cell">Category</div>
-          <div className="w-1/5 p-2 cell">2020-01-01</div>
-          <div className="w-1/5 p-2 cell">Active</div>
-          <div className="p-2 cell w-1/10">action</div>
-          <div className="p-2 cell w-1/10">
-            <input type="checkbox" />
-          </div>
-        </div>
-        <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
-          <div className="w-1/5 p-2 cell">Product Name</div>
-          <div className="w-1/5 p-2 cell">Category</div>
-          <div className="w-1/5 p-2 cell">2020-01-01</div>
-          <div className="w-1/5 p-2 cell">Active</div>
-          <div className="p-2 cell w-1/10">action</div>
-          <div className="p-2 cell w-1/10">
-            <input type="checkbox" />
-          </div>
-        </div>
-        <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
-          <div className="w-1/5 p-2 cell">Product Name</div>
-          <div className="w-1/5 p-2 cell">Category</div>
-          <div className="w-1/5 p-2 cell">2020-01-01</div>
-          <div className="w-1/5 p-2 cell">Active</div>
-          <div className="p-2 cell w-1/10">action</div>
-          <div className="p-2 cell w-1/10">
-            <input type="checkbox" />
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className="flex justify-center">

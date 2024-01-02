@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import productService from '../../services/productService';
+import productService from '../../services/productServices';
 
 // Action creator để gọi API và lưu dữ liệu vào Redux
 export const fetchProducts = createAsyncThunk('product/fetchProducts', async() => {

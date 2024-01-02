@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import groupsService from '../../services/groupsService';
+import groupsService from '../../services/groupsServices';
 
 // Action creator để gọi API và lưu dữ liệu vào Redux
 export const fetchProducts = createAsyncThunk('groups/fetchGroups', async() => {

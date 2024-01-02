@@ -4,9 +4,11 @@ import CreateAndEditProduct from '../compoments/table/product/createAndEditProdu
 import ProtectedRoute from './rootRouter';
 import LoadAdmin from '../admin';
 import DisplayLayout from '../display';
-import IndexCategory from '../compoments/table/product/indexCategory';
-import CreateAndEditCategory from '../compoments/table/product/createAndEditCategory';
+import IndexCategory from '../compoments/table/category/indexCategory';
+import CreateAndEditCategory from '../compoments/table/category/createAndEditCategory';
 import LoginForm from '../compoments/auth/Login';
+import IndexUser from '../compoments/table/user/indexUser';
+import CreateAndEditUser from '../compoments/table/user/createAndEditUser';
 
 const RootRouter = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +20,8 @@ const RootRouter = createBrowserRouter(
         <Route  path="createProduct" element={<CreateAndEditProduct />} />
         <Route  path="productCategory" element={<IndexCategory />} />
         <Route  path="createProductCategory" element={<CreateAndEditCategory />} />
+        <Route  path="user" element={<IndexUser />} />
+        <Route  path="createUser" element={<CreateAndEditUser />} />
       </Route>
       <Route path="/" element={<DisplayLayout />}>
         {/* <Route path="/admin/product" element={<IndexProduct />} />

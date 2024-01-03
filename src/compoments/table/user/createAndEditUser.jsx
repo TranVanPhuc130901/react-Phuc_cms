@@ -1,9 +1,17 @@
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import PermissionTable from './compoment/permissionTable';
+import { useState } from 'react';
 
 const CreateAndEditUser = ( ) => {
+    const [selectedUserRole, setSelectedUserRole] = useState(false);
+    const handlePermissionClick = () => {
+        // Toggle the selectedPermission state when clicking on a permission
+       setSelectedUserRole(!selectedUserRole);
+      };
     return (
+        <div className='flex w-full flex-col'>
         <form className="h-[calc(100vh-100px)] overflow-auto w-full">
             <div className="flex flex-col gap-4">
                     <legend className="font-bold text-2xl text-center mt-2">Thông tin cơ bản</legend>
@@ -58,11 +66,16 @@ const CreateAndEditUser = ( ) => {
                         </div> */}
                         
                     </div>
-                    <div className='cursor-pointer bg-sky-600 text-white p-2 rounded-[8px] flex justify-center items-center w-[400px]'>Mở bảng phân quyền</div>
+                    <div className='cursor-pointer bg-sky-600 text-white p-2 rounded-[8px] flex justify-center items-center w-[400px]'
+                    onClick={handlePermissionClick}
+                    >Mở bảng phân quyền</div>
                     
                 {/* <button>Save</button> */}
             </div>
         </form>
+
+        <PermissionTable isStatus={selectedUserRole} activeFormPermission={handlePermissionClick}/>
+        </div>
     )
 }
 

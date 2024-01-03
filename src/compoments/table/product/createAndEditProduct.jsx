@@ -1,8 +1,34 @@
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import DropDownList from '../../base/dropDownList';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGroups } from '../../../redux/features/groupsDuck';
+import { useEffect, useState } from 'react';
+import CKEditorWrapper from '../../base/ckEditor';
 
 const CreateAndEditProduct = ( ) => {
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const dispatch = useDispatch();
+    const groups = useSelector((state) => state.groups.groups);
+    const status = useSelector((state) => state.groups.status);
+    const error = useSelector((state) => state.groups.error);
+   
+    useEffect(() => {
+        dispatch(fetchGroups("product"));
+      }, [dispatch]);
+      console.log(groups)
+      if (status === 'loading') {
+        return <div>Loading...</div>;
+      }
+    
+      if (status === 'failed') {
+        return <div>Error: {error}</div>;
+      }
+
+      const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+      };
     return (
         <form className="h-[calc(100vh-100px)] overflow-auto w-full">
             <div className="flex flex-col gap-4">
@@ -10,8 +36,9 @@ const CreateAndEditProduct = ( ) => {
                     <div className="form-group">
                         <label className="control-label col-md-2">Danh mục cha</label>
                         <div className="col-md-10">
-                            dropdownDanh mục
+                            <DropDownList options={groups} onSelectChange={handleCategoryChange} />
                         </div>
+                        <p>Selected Category: {selectedCategory}</p>
                     </div>
                     <div className="flex flex-col gap-3">
                         <label className="font-bold text-xl">Tên bài viết <span></span></label>
@@ -99,23 +126,7 @@ const CreateAndEditProduct = ( ) => {
                     <legend className="font-bold text-xl">Mô tả chi tiết</legend>
                     <div className="form-group">
                         <div className="h-[300px]">
-                        <CKEditor height="300px"
-                            editor={ ClassicEditor }
-                            data="<p>Hello from CKEditor5!</p>"
-                            onReady={ editor => {
-                                // You can store the "editor" and use when it is needed.
-                                console.log( 'Editor is ready to use!', editor );
-                            } }
-                            onChange={ ( event ) => {
-                                console.log( event );
-                            } }
-                            onBlur={ ( event, editor ) => {
-                                console.log( 'Blur.', editor );
-                            } }
-                            onFocus={ ( event, editor ) => {
-                                console.log( 'Focus.', editor );
-                            } }
-                        />
+                       <CKEditorWrapper/>
                         </div>
                     </div>
                     <legend className="font-bold text-xl">Tối ưu cho công cụ tìm kiếm</legend>

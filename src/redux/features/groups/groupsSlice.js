@@ -3,8 +3,9 @@ import groupsService from '../../services/groupsServices';
 
 // Action creator để gọi API và lưu dữ liệu vào Redux
 export const fetchProducts = createAsyncThunk('groups/fetchGroups', async() => {
-    const response = await groupsService.getAllProducts();
+    const response = await groupsService.getAllGroups();
     return response.data;
+
 });
 
 // Slice cho sản phẩm

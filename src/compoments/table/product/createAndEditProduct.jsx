@@ -8,6 +8,8 @@ import { uploadPlugin } from '../../base/ckEditor';
 // import Editor from '../../../../ckeditor5/build/ckeditor.js';
 // import { CKEditor } from '@ckeditor/ckeditor5-react';
 import Editor from '../../base/lexicalEditor.jsx';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 const editorConfiguration = {
@@ -15,6 +17,8 @@ const editorConfiguration = {
 };
 
 const CreateAndEditProduct = ( ) => {
+
+    const [editorData, setEditorData] = useState();
     const [selectedCategory, setSelectedCategory] = useState("");
     const dispatch = useDispatch();
     const groups = useSelector((state) => state.groups.groups);
@@ -133,7 +137,7 @@ const CreateAndEditProduct = ( ) => {
                     <legend className="font-bold text-xl">Mô tả chi tiết</legend>
                     <div className="form-group">
                         <div className="h-[300px]">
-                        {/* <CKEditor
+                        <CKEditor
                             editor={ClassicEditor}
                             config={{
                                 extraPlugins: [uploadPlugin],
@@ -143,8 +147,7 @@ const CreateAndEditProduct = ( ) => {
                                 setEditorData(editor.getData());
                                 console.log(editorData)
                             }}
-                        /> */}
-                        <Editor/>
+                        />
                         </div>
                     </div>
                     <legend className="font-bold text-xl">Tối ưu cho công cụ tìm kiếm</legend>

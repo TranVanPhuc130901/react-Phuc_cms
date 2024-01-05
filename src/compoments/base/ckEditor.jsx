@@ -1,6 +1,7 @@
 // ckEditor.jsx
 import axios from 'axios';
 
+
 export function uploadAdapter(loader) {
   return {
     upload: () => {

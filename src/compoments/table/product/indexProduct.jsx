@@ -88,7 +88,7 @@ const IndexProduct = () => {
         </div>
         <div className="flex flex-col gap-[4px] mr-[10px]">
           <div className="flex items-center gap-[10px]">
-            <Link to="/create">
+            <Link to="/admin/createProduct">
               <button className="rounded-[20px] px-2 text-[#fff] text-xl px-8 py-2 bg-[--primary-light-bluenavy]">
                 Add new
               </button>

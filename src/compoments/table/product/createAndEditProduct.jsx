@@ -2,21 +2,48 @@ import DropDownList from '../../base/dropDownList';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGroups } from '../../../redux/features/groupsDuck';
 import { useEffect, useState } from 'react';
-import { uploadPlugin } from '../../base/ckEditor';
-//  import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-//  import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import Editor from '../../../../ckeditor5/build/ckeditor.js';
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Editor from '../../base/lexicalEditor.jsx';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import MyEditor from '../../ckEditor/myEditor.jsx';
 
-
-const editorConfiguration = {
-    toolbar: [ 'bold', 'italic' ]
-};
 
 const CreateAndEditProduct = ( ) => {
+    // khai báo các trường state để thêm mới vào Db
+    const [productName, setProductName] = useState("");
+    const [productDescription, setProductDescription] = useState("");
+    const [productSku, setProductSku] = useState("");
+    const [productPriceOld, setProductPriceOld] = useState("");
+    const [productPriceNew, setProductPriceNew] = useState("");
+    const [productDate, setProductDate] = useState("");
+    const [productStatus, setProductStatus] = useState("");
+    const [productQuantity, setProductQuantity] = useState("");
+    const [productImage, setProductImage] = useState("");
+    const [productOrder, setProductOrder] = useState("");
+    const [productContent, setProductContent] = useState("");
+    const [productUrl, setProductUrl] = useState("");
+    const [productMetaTitle, setProductMetaTitle] = useState("");
+    const [productMetaDescription, setProductMetaDescription] = useState("");
+    const [productMetaKeyword, setProductMetaKeyword] = useState("");
+    const [productTag, setProductTag] = useState("");
+// ------------------------ end khai báo state
+// khai báo form Data 
+    const formProdcut = {
+        productName: productName,
+        productDescription: productDescription,
+        productSku: productSku,
+        productPriceOld: productPriceOld,
+        productPriceNew: productPriceNew,
+        productDate: productDate,
+        productStatus: productStatus,
+        productQuantity: productQuantity,
+        productImage: productImage,
+        productOrder: productOrder,
+        productContent: productContent,
+        productUrl: productUrl,
+        productMetaTitle: productMetaTitle,
+        productMetaDescription: productMetaDescription,
+        productMetaKeyword: productMetaKeyword,
+        productTag: productTag
+    }
+// end khai báo form data
 
     const [editorData, setEditorData] = useState();
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -136,18 +163,8 @@ const CreateAndEditProduct = ( ) => {
                 
                     <legend className="font-bold text-xl">Mô tả chi tiết</legend>
                     <div className="form-group">
-                        <div className="h-[300px]">
-                        <CKEditor
-                            editor={ClassicEditor}
-                            config={{
-                                extraPlugins: [uploadPlugin],
-                            }}
-                            onReady={(editor) => {}}
-                            onChange={(event, editor) => {
-                                setEditorData(editor.getData());
-                                console.log(editorData)
-                            }}
-                        />
+                        <div className="">
+                            <MyEditor/>
                         </div>
                     </div>
                     <legend className="font-bold text-xl">Tối ưu cho công cụ tìm kiếm</legend>

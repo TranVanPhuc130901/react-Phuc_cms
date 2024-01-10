@@ -123,13 +123,13 @@ const IndexProduct = () => {
           </div>
         </div>
         {products.map((product) => (
-          <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
+          <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow" key={product.iiId}>
             <div className="w-1/5 p-2 cell">{product.viTitle}</div>
             <div className="w-1/5 p-2 cell"><img src={product.viImage} alt={product.viTitle} /></div>
             <div className="w-1/5 p-2 cell">Category</div>
             <div className="w-1/5 p-2 cell">{product.dateCreated}</div>
             <div className="w-1/5 p-2 cell">Active</div>
-            <div className="p-2 cell w-1/10">action</div>
+            <div className="p-2 cell w-1/10"><Link to={`/admin/createProduct?id=${product.iiId}`}>Edit</Link></div>
             <div className="p-2 cell w-1/10">
               <input type="checkbox" />
             </div>

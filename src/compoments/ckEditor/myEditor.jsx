@@ -5,11 +5,11 @@ import CloudinaryFileManagerPlugin from './cloudinaryPlugin';
 import axios from 'axios';
 
 // khai báo tên cloudDinary
-const cloudName = 'dpnlgxwkp';3
+const cloudName = 'dpnlgxwkp';
 // khai báo tên unsignedUploadPreset(dùng khi upload)
 const unsignedUploadPreset = 'octe1lva';
 
-const MyEditor = ({onContentChange}) => {
+const MyEditor = ({onContentChange, contentOld}) => {
   const [content, setContent] = useState('');
   const [isFileManagerVisible, setIsFileManagerVisible] = useState(false);
 
@@ -104,7 +104,7 @@ const MyEditor = ({onContentChange}) => {
           },
         }}
         onEditorChange={handleEditorChange}
-        value={content}
+        value={contentOld}
       />
       {isFileManagerVisible && (
         <CloudinaryFileManagerPlugin onImageSelected={(imageUrl) => handleImageSelected(imageUrl)} />

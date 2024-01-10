@@ -18,6 +18,7 @@ const RootRouter = createBrowserRouter(
         {/* <Route index element={<Navigate to="/admin/product" />} /> */}
         <Route  path="product" element={<IndexProduct />} />
         <Route  path="createProduct" element={<CreateAndEditProduct />} />
+        <Route  path="createProduct/:productId" element={<CreateAndEditProduct />} />
         <Route  path="productCategory" element={<IndexCategory />} />
         <Route  path="createProductCategory" element={<CreateAndEditCategory />} />
         <Route  path="user" element={<IndexUser />} />

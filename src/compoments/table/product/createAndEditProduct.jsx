@@ -7,36 +7,21 @@ import ToggleButton from '../../base/toggleButton.jsx';
 import productService from '../../../services/product.jsx';
 import { MyEditorProvider } from '../../base/useContext.jsx';
 import UploadImageBox from '../../base/uploadImage.jsx';
-import { useParams } from 'react-router-dom';
+import { useParams,useLocation   } from 'react-router-dom';
 
 
 const CreateAndEditProduct = ( ) => {
     // lấy giá trị id từ thanh url
-    const {id} = useParams();
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get('id');
+    // const { id } = useParams();
+    // console.log(productId);
+    // const match = useRouteMatch()
     // tạo biến khai báo trạng thái là insert hay update
     const [editingMode, setEditingMode] = useState(false);
-    // khai báo các trường state để thêm mới vào Db
-    // const [productName, setProductName] = useState("");
-    // const [productDescription, setProductDescription] = useState("");
-    // const [productSku, setProductSku] = useState("");
-    // const [productPriceOld, setProductPriceOld] = useState("");
-    // const [productPriceNew, setProductPriceNew] = useState("");
-    // const [productDate, setProductDate] = useState("");
-    // const [productQuantity, setProductQuantity] = useState("");
-    // const [productImage, setProductImage] = useState("");
-    // const [productOrder, setProductOrder] = useState("");
-    // const [productContent, setProductContent] = useState("");
-    // const [productUrl, setProductUrl] = useState("");
-    // const [productMetaTitle, setProductMetaTitle] = useState("");
-    // const [productMetaDescription, setProductMetaDescription] = useState("");
-    // const [productMetaKeyword, setProductMetaKeyword] = useState("");
-    // const [productTag, setProductTag] = useState("");
-    // const [toggleStates, setToggleStates] = useState({
-    //     txtStatus: 0,
-    //     txtBusiness: 0,
-    //     txtOther: 0,
-    //   });
-     const [formData, setFormData] = useState({
+    const [isNew, setIsNew] = useState(!id);
+    const [formData, setFormData] = useState({
         productName: "",
         productDescription: "",
         productSku: "",
@@ -52,36 +37,67 @@ const CreateAndEditProduct = ( ) => {
         productMetaDescription: "",
         productMetaKeyword: "",
         productTag: "",
+        productParam: "",
         toggleStates: {
             txtStatus: 0,
             txtBusiness: 0,
             txtOther: 0,
         },
+        productAssetImage:"",
     });
-// ------------------------ end khai báo state
-// khai báo form Data 
-    // let formProduct = {
-    //     Title: productName,
-    //     Description: productDescription,
-    //     // productSku: productSku,
-    //     fiPriceOld: productPriceOld,
-    //     fiPriceNew: productPriceNew,
-    //     dateCreated: productDate,
-    //     Status: toggleStates.txtStatus,
-    //     productBusiness: toggleStates.txtBusiness,
-    //     productOther: toggleStates.txtOther,
-    //     Quanlity: productQuantity,
-    //     productImage: productImage,
-    //     SortOrder: productOrder,
-    //     Content: productContent,
-    //     Link: productUrl,
-    //     MetaTitle: productMetaTitle,
-    //     MetaDescription: productMetaDescription,
-    //     MetaKeyword: productMetaKeyword,
-    //     Tag: productTag,
-    //     Param: "",
-    // }
-// end khai báo form data
+    useEffect(() => {
+        const fetchData = async () => {
+          // Kiểm tra xem có tồn tại id từ URL không để xác định trạng thái là insert hay update
+          if (id) {
+            setEditingMode(true);
+    
+            try {
+              // Thực hiện lấy dữ liệu từ API hoặc bất kỳ nguồn dữ liệu nào khác để điền vào form
+              let dataProduct = await productService.getAllProducts(id,"","");
+              let existingProduct = dataProduct.datas.items[0];
+              console.log(existingProduct)
+              // Cập nhật formData với dữ liệu từ API
+              setFormData({
+                ...formData,
+                productName: existingProduct.viTitle,
+                productDescription: existingProduct.viDescription,
+                productSku: existingProduct.viCode,
+                productPriceOld: existingProduct.fiPriceOld,
+                productPriceNew: existingProduct.fiPriceNew,
+                productDate: existingProduct.diDateCreated,
+                productQuantity: existingProduct.Inventory,
+                productImage: existingProduct.viImage,
+                productOrder: existingProduct.iiSortOrder,
+                productContent: existingProduct.viContent,
+                productUrl: existingProduct.viLink,
+                productMetaTitle: existingProduct.viMetaTitle,
+                productMetaDescription: existingProduct.viMetaDescription,
+                productMetaKeyword: existingProduct.viMetaKeyword,
+                productTag: existingProduct.viTag,
+                productParam: existingProduct.viParam,
+                toggleStates: {
+                  txtStatus: existingProduct.iiStatus,
+                  txtBusiness: 0,
+                  txtOther: 0,
+                },
+                productAssetImage: existingProduct.AccessId,
+              });
+              
+              console.log(formData)
+            } catch (error) {
+              // Xử lý lỗi nếu có
+              console.error('Error fetching product data:', error);
+            }
+          } else {
+            setEditingMode(false);
+          }
+        };
+    
+        fetchData();
+      }, [id]);
+
+     
+
 
 const handleChange = (field, value) => {
     setFormData((prevData) => ({
@@ -103,10 +119,10 @@ const handleInsert = async (formData) => {
 const handleEditorContentChange = (newContent) => {
     // Thực hiện các công việc cần thiết với newContent, ví dụ:
     console.log("Nội dung mới từ MyEditor:", newContent);
-    // Cập nhật trạng thái formProduct nếu cần:
+    // Cập nhật trạng thái formData nếu cần:
     setFormData({
         ...formData,
-        productContent: newContent,
+        productParam: newContent,
       });
   };
 const handleToggle = (id, status) => {
@@ -116,19 +132,21 @@ const handleToggle = (id, status) => {
     }));
     console.log(toggleStates);
   };
-
+  const handleImageUpload = ({ imageUrl, assetId }) => {
+    // Update the imageData state with the new imageUrl and assetId
+    setFormData({
+        ...formData,
+        productImage: imageUrl,
+        productAssetImage: assetId,
+      });
+      console.log(formData);
+  };
     const handleClick = async (e) => {
         e.preventDefault();
-        console.log(formProduct);
+        console.log(formData);
         if (editingMode) {
             // lấy thông tin cũ từ DB
-           let existingProduct = await productService.getAllProducts(id);
-            setFormData({
-                ...formData,
-                productName: existingProduct.Title,
-                productDescription: existingProduct.Description,
-                // ... (Cập nhật các trường khác)
-            });
+          
             // xử lý khi cập nhật
             handleUpdate(id ,formData);
           } else {
@@ -176,6 +194,7 @@ const handleToggle = (id, status) => {
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     type="text" 
                                     id="txtName"
+                                    value={formData.productName}
                                     onChange={(e) => handleChange("productName", e.target.value)}
                                 />
                             </div>
@@ -186,7 +205,8 @@ const handleToggle = (id, status) => {
                                 <textarea 
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     placeholder="Mô tả"
-                                    id="txtDescription" 
+                                    id="txtDescription"
+                                    value={formData.productDescription}
                                     rows={4}
                                     onChange={(e) => handleChange("productDescription", e.target.value)}
                                 />   
@@ -200,6 +220,7 @@ const handleToggle = (id, status) => {
                                         type="text" 
                                         placeholder="SKU" 
                                         id="txtSKU" 
+                                        value={formData.productSku}
                                         className="w-full p-2 rounded-[8px] border-[#ced4da]"
                                         onChange={(e) => handleChange("productSKU", e.target.value)}
                                     />
@@ -213,6 +234,7 @@ const handleToggle = (id, status) => {
                                             type="number" 
                                             placeholder="Giá niêm yết" 
                                             id="txtPrice" 
+                                            value={formData.productPriceOld}
                                             className="w-full p-2 rounded-[8px] border-[#ced4da]"
                                             onChange={(e) => handleChange("productPriceOld", e.target.value)}
                                         />
@@ -227,6 +249,7 @@ const handleToggle = (id, status) => {
                                             type="number" 
                                             placeholder="Giá khuyến mãi" 
                                             id="txtPriceNew" 
+                                            value={formData.productPriceNew}
                                             className="w-full p-2 rounded-[8px] border-[#ced4da]"
                                             onChange={(e) => handleChange("productPriceNew",e.target.value)}
                                         />
@@ -234,7 +257,7 @@ const handleToggle = (id, status) => {
                                 </div>
                             </div>
                         </div>
-                        <UploadImageBox/>
+                        <UploadImageBox urlOld={formData.productImage} onImageUpload={handleImageUpload} isNew={isNew} assetIdOld={formData.productAssetImage}/>
                         <div className="flex gap-[10px]">
                             <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
                                 <label className="font-bold text-xl">Ngày đăng</label>
@@ -243,6 +266,7 @@ const handleToggle = (id, status) => {
                                         className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                         placeholder="Ngày đăng" 
                                         id="txtCreatedDate"
+                                        value={formData.productDate}
                                         onChange={(e) => handleChange("productDate",(e.target.value))}
                                     />
                                 </div>
@@ -254,6 +278,7 @@ const handleToggle = (id, status) => {
                                         type="Number" 
                                         className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                         placeholder="Thứ tự" id="txtOrder"
+                                        value={formData.productOrder}
                                         onChange={(e) => handleChange("productOrder",e.target.value)}
                                     />
                                 </div>
@@ -265,6 +290,7 @@ const handleToggle = (id, status) => {
                                         type="Number" 
                                         className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                         placeholder="Số lượng tồn" id="txtQuantity"
+                                        value={formData.productQuantity}
                                         onChange={(e) => handleChange("productQuantity",e.target.value)}
                                     />
                                 </div>
@@ -291,7 +317,7 @@ const handleToggle = (id, status) => {
                         <div className="form-group">
                             {/* <MyEditorProvider> */}
                                 <div className="">
-                                    <MyEditor onContentChange={(newContent) => handleEditorContentChange(newContent)}/>
+                                    <MyEditor onContentChange={(newContent) => handleEditorContentChange(newContent)} contentOld={formData.productParam}/>
                                 </div>
                             {/* </MyEditorProvider> */}
                         </div>
@@ -301,6 +327,7 @@ const handleToggle = (id, status) => {
                             <div className="w-full">
                                 <input 
                                     type="text" id="txtUrl" 
+                                    value={formData.productUrl}
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     placeholder="URL"
                                     onChange={(e) => handleChange("productUrl",e.target.value)}
@@ -313,6 +340,7 @@ const handleToggle = (id, status) => {
                                 <input 
                                     type="text" 
                                     id="txtMetaTitle" 
+                                    value={formData.productMetaTitle}
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     placeholder="Meta title"
                                     onChange={(e) => handleChange("productMetaTitle",e.target.value)}
@@ -325,6 +353,7 @@ const handleToggle = (id, status) => {
                                 <input 
                                     type="text" 
                                     id="txtMetaKeyword" 
+                                    value={formData.productMetaKeyword}
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     placeholder="Meta keyword"
                                     onChange={(e) => handleChange("productMetaKeyword",e.target.value)}
@@ -336,6 +365,7 @@ const handleToggle = (id, status) => {
                             <div className="col-md-10">
                                 <textarea
                                     type="text" id="txtMetaDescription"  
+                                    value={formData.productMetaDescription}
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]"  
                                     rows={5} 
                                     placeholder="Meta description"
@@ -349,6 +379,7 @@ const handleToggle = (id, status) => {
                                 <input 
                                     type="text" 
                                     id="txtTag" 
+                                    value={formData.productTag}
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     placeholder="Add tag" 
                                     onChange={(e) => handleChange("productTag",e.target.value)}

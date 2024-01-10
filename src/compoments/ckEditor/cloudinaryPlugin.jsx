@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const CloudinaryFileManagerPlugin = ({ onImageSelected, onDeleteImage  }) => {
+const CloudinaryFileManagerPlugin = ({ onImageSelected }) => {
   const [images, setImages] = useState([]);
 
 
@@ -27,14 +27,6 @@ const CloudinaryFileManagerPlugin = ({ onImageSelected, onDeleteImage  }) => {
     if (onImageSelected) {
       onImageSelected(image.secure_url);
     }
-  };
-
-  const handleKeyDown = (event, image) => {
-    // Bắt sự kiện nhấn nút "Delete"
-    if (event.keyCode  === 46 ) {
-      onDeleteImage(image.secure_url);
-    }
-    
   };
 
   return (

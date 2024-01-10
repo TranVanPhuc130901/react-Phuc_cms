@@ -13,10 +13,14 @@ const productService = {
         throw error; // Re-throw the error to handle it in the component
       }
     },
-
   
-    addProduct: async (productData) => {
-        // Gọi API thêm sản phẩm
+    insertProduct: async(data) => {
+      try {
+          const response = await axios.post('http://localhost:8989/api/create-item', data);
+          return response.data;
+      } catch (error) {
+          throw error;
+      }
     },
     editProduct: async (productId, productData) => {
         // Gọi API sửa sản phẩm

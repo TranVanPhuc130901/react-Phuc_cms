@@ -9,6 +9,8 @@ const productService = {
             throw error;
         }
     },
+
+
 };
 
 export default productService;

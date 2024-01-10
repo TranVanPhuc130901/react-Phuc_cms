@@ -9,37 +9,30 @@ const cloudName = 'dpnlgxwkp';3
 // khai báo tên unsignedUploadPreset(dùng khi upload)
 const unsignedUploadPreset = 'octe1lva';
 
-const MyEditor = () => {
+const MyEditor = ({onContentChange}) => {
   const [content, setContent] = useState('');
   const [isFileManagerVisible, setIsFileManagerVisible] = useState(false);
 
+
   const handleEditorChange = (e, editor) => {
     const newContent = editor.getContent();
-    console.log(newContent);
     setContent(newContent);
+    onContentChange(newContent); // Truyền giá trị lên cho cha
   };
 
-  // useEffect(() => {
-  //   console.log('Content updated:', content);
-  //   // Thực hiện các công việc cần thiết khi content thay đổi
-  // }, [content]);
-
-  const handleDeleteImage = (deletedImage) => {
-    console.log(deletedImage)
-    // Xóa ảnh khỏi nội dung Editor
-    const contentWithoutImage = content.replace(
-      `<img src="${deletedImage.url}" alt="Cloudinary Image" />`,
-      ''
-    );
-    setContent(contentWithoutImage);
-  };
 
   const handleImageSelected = (imageUrl) => {
+    const editor = tinymce.activeEditor;
     // Insert the selected image into the editor.
-    // You can customize this part based on your TinyMCE setup.
+    // const currentContent = editor.getContent()
     const imageHtml = `<img src="${imageUrl}" alt="Cloudinary Image" />`;
-    const newContent = content + imageHtml;
-    setContent(newContent);
+    // You can customize this part based on your TinyMCE setup.
+    // editor.getContent().execCommand('mceInsertContent', false, imageUrl);
+    editor.insertContent(imageHtml);
+    // editor.getContent().setContent(currentContent);
+    setContent(editor.getContent());
+    // const newContent = currentContent + imageHtml;
+    // setContent(newContent);
     setIsFileManagerVisible(false);
   };
 
@@ -114,7 +107,7 @@ const MyEditor = () => {
         value={content}
       />
       {isFileManagerVisible && (
-        <CloudinaryFileManagerPlugin onImageSelected={handleImageSelected} onDeleteImage={handleDeleteImage} />
+        <CloudinaryFileManagerPlugin onImageSelected={(imageUrl) => handleImageSelected(imageUrl)} />
       )}
     </div>
   );

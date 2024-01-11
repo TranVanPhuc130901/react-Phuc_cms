@@ -148,7 +148,8 @@ const handleToggle = (id, status) => {
             // lấy thông tin cũ từ DB
           
             // xử lý khi cập nhật
-            handleUpdate(id ,formData);
+            productService.editProduct(id, formData);
+            // handleUpdate(id ,formData);
           } else {
             productService.insertProduct(formData);
           }

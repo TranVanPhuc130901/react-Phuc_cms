@@ -23,7 +23,12 @@ const productService = {
       }
     },
     editProduct: async (productId, productData) => {
-        // Gọi API sửa sản phẩm
+      try {
+        const response = await axios.put(`http://localhost:8989/api/edit-item/${productId}`, productData);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
     },
     deleteProduct: async (productId) => {
         // Gọi API xóa sản phẩm

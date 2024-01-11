@@ -39,21 +39,23 @@ const UploadImageBox = ({ urlOld, onImageUpload, isNew ,assetIdOld }) => {
         if (publicId) {
           const response = await axios.delete(`http://localhost:8989/api/delete-files/${publicId}`);
           console.log('Image deleted successfully:', response.data);
+          setImageUrl(null);
+          setPublicId(null);
+          setSelectedFile(null);
         }
       } else {
         // Nếu là cập nhật, xóa theo assetIdOld
         if (assetIdOld) {
           const response = await axios.delete(`http://localhost:8989/api/delete-files/${assetIdOld}`);
           console.log('Image deleted successfully:', response.data);
+          urlOld = "";
         }
       }
       
-      setImageUrl(null);
-      setPublicId(null);
-      setSelectedFile(null);
+      
   
       // Call the callback function to update the parent component state
-      onImageUpload(null);
+      onImageUpload({ imageUrl: "", assetId: "" });
     } catch (error) {
       console.error('Error deleting image:', error.message);
     }

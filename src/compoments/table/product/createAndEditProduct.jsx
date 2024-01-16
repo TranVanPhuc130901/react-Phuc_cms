@@ -22,6 +22,7 @@ const CreateAndEditProduct = ( ) => {
     const [editingMode, setEditingMode] = useState(false);
     const [isNew, setIsNew] = useState(!id);
     const [formData, setFormData] = useState({
+        productApp: "product",
         productName: "",
         productDescription: "",
         productSku: "",
@@ -59,6 +60,7 @@ const CreateAndEditProduct = ( ) => {
               // Cập nhật formData với dữ liệu từ API
               setFormData({
                 ...formData,
+                productApp: existingProduct.viApp,
                 productName: existingProduct.viTitle,
                 productDescription: existingProduct.viDescription,
                 productSku: existingProduct.viCode,
@@ -394,7 +396,7 @@ const handleToggle = (id, status) => {
                                 onClick={(e) => handleClick(e)}
                                 type='button'
                             >
-                                Create
+                               {editingMode ? 'Cập nhật' : 'Thêm mới'}
                             </button>
                         </div>
                     </div>

@@ -31,6 +31,12 @@ const productService = {
     }
     },
     deleteProduct: async (productId) => {
+      try {
+        const response = await axios.delete(`http://localhost:8989/api/delete-item/${productId}`);
+        return response.data;
+      } catch (error) {
+        throw error;
+      }
         // Gọi API xóa sản phẩm
     }
 };

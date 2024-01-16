@@ -6,7 +6,7 @@ import productService from '../../../services/product';
 
 const IndexProduct = () => {
   const [products, setProducts] = useState([]);
-
+  const [checkedProductIds, setCheckedProductIds] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,6 +21,19 @@ const IndexProduct = () => {
 
     fetchData();
   }, []);
+
+  const handleDeleteClick = (id) => {
+    productService.deleteProduct(id);
+  }
+
+  const handleCheckAllClick = () => {
+    const areAllChecked = checkedProductIds.length === products.length;
+
+    setCheckedProductIds(areAllChecked ? [] : products.map((product) => product.iiId));
+    // Check or uncheck all checkboxes based on areAllChecked
+
+    console.log(checkedProductIds);
+  };
   return (
     <div className={StyleProduct.containerProduct}>
       <div className="flex justify-between items_center border-b-[1px] pb-2">
@@ -93,8 +106,15 @@ const IndexProduct = () => {
                 Add new
               </button>
             </Link>
-            <div className="rounded-[20px] px-2 text-[#fff] text-2xl px-8 py-2 bg-[--primary-light-bluenavy]">
-              <input type="checkbox" name="" id="" />
+            <div className="rounded-[20px] px-2 text-[#fff] text-2xl px-8 py-2 bg-[--primary-light-bluenavy] flex items-center gap-4">
+              <input type="checkbox" name="" id="checkAll" className='cursor-pointer'
+                onChange={handleCheckAllClick}
+              />
+              <div className='w-4 h-5 flex items-center cursor-pointer'>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7-7-7" />
+                </svg>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-[8px]">
@@ -118,9 +138,9 @@ const IndexProduct = () => {
           <div className="w-1/5 p-2 cell header">Date</div>
           <div className="w-1/5 p-2 cell header">Status</div>
           <div className="p-2 cell w-1/10 header">Actions</div>
-          <div className="p-2 cell w-1/10 header">
+          {/* <div className="p-2 cell w-1/10 header">
             <input type="checkbox" />
-          </div>
+          </div> */}
         </div>
         {products.map((product) => (
           <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow" key={product.iiId}>
@@ -129,9 +149,23 @@ const IndexProduct = () => {
             <div className="w-1/5 p-2 cell">Category</div>
             <div className="w-1/5 p-2 cell">{product.dateCreated}</div>
             <div className="w-1/5 p-2 cell">Active</div>
-            <div className="p-2 cell w-1/10"><Link to={`/admin/createProduct?id=${product.iiId}`}>Edit</Link></div>
             <div className="p-2 cell w-1/10">
-              <input type="checkbox" />
+              <Link to={`/admin/createProduct?id=${product.iiId}`}>Edit</Link>
+              <div onClick={() => handleDeleteClick(product.iiId)}>Delete</div>
+              </div>
+            <div className="p-2 cell w-1/10">
+            <input
+              type="checkbox"
+              checked={checkedProductIds.includes(product.iiId)}
+              onChange={() => {
+                // Update checkedProductIds based on checkbox state
+                setCheckedProductIds(
+                  checkedProductIds.includes(product.iiId)
+                    ? checkedProductIds.filter((id) => id !== product.iiId)
+                    : [...checkedProductIds, product.iiId]
+                );
+              }}
+            />
             </div>
           </div>
         ))}

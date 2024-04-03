@@ -158,15 +158,15 @@ const handleToggle = (id, status) => {
     }
 
     const [editorData, setEditorData] = useState();
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const dispatch = useDispatch();
-    const groups = useSelector((state) => state.groups.groups);
-    const status = useSelector((state) => state.groups.status);
-    const error = useSelector((state) => state.groups.error);
+    // const [selectedCategory, setSelectedCategory] = useState("");
+    // const dispatch = useDispatch();
+    // const groups = useSelector((state) => state.groups.groups);
+    // const status = useSelector((state) => state.groups.status);
+    // const error = useSelector((state) => state.groups.error);
    
-    useEffect(() => {
-        dispatch(fetchGroups("product"));
-      }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(fetchGroups("product"));
+    //   }, [dispatch]);
       if (status === 'loading') {
         return <div>Loading...</div>;
       }
@@ -187,7 +187,7 @@ const handleToggle = (id, status) => {
                         <div className="form-group">
                             <label className="control-label col-md-2">Danh mục cha</label>
                             <div className="col-md-10">
-                                <DropDownList options={groups} onSelectChange={handleCategoryChange} />
+                                {/* <DropDownList options={groups} onSelectChange={handleCategoryChange} /> */}
                             </div>
                         </div>
                         <div className="flex flex-col gap-3">

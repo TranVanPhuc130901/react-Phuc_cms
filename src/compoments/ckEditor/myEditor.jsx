@@ -42,8 +42,10 @@ const MyEditor = ({onContentChange, contentOld}) => {
         apiKey={`lxm8cy4jc57hcmxw5dc0o5xaf8bbk6ig7t1dcqnys1s4rnvr`}
         init={{
           height: 600,
-            plugins: 'cloudinaryFileManager mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss', // Add your other plugins here
-           toolbar: ' cloudinaryFileManagerButton | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat', // Add your other toolbar buttons here
+          //   plugins: 'cloudinaryFileManager mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss', // Add your other plugins here
+          //  toolbar: ' cloudinaryFileManagerButton | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat', // Add your other toolbar buttons here
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount linkchecker',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
           images_upload_base_path: `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
           images_upload_credentials: true,
           file_picker_types: 'image',

@@ -13,11 +13,13 @@ const UploadImageBox = ({ urlOld, onImageUpload, isNew ,assetIdOld }) => {
 
     try {
       const formData = new FormData();
-      formData.append('files', file);
+      formData.append('image', file);
 
-      const response = await axios.post('http://localhost:8989/api/upload-files', formData);
+      const response = await axios.post('http://localhost:3000/api/image/addImage', formData);
 
-      const newImageUrl  = response.data.path;
+      console.log(response)
+
+      const newImageUrl  = response.data.url;
       const newPublicId  = response.data.filename;
 
       setImageUrl(newImageUrl);

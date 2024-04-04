@@ -42,10 +42,6 @@ const LoginForm = () => {
 
     alert("Đăng nhập thất bại")
 
-    // NotificationManager.error('Error message', 'Title here');
-
-    // Handle login success:
-    // 1. Store token in localStorage (or a secure mechanism)
     
   };
 

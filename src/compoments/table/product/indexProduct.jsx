@@ -12,8 +12,8 @@ const IndexProduct = () => {
       try {
         // Call your API function here
         const data = await productService.getAllProducts();
-        setProducts(data.datas.items);
-        console.log(data.datas.items); // Assuming your API response contains the products
+        setProducts(data.roles);
+        console.log(data.roles); // Assuming your API response contains the products
       } catch (error) {
         console.error('Error fetching data:', error.message);
       }
@@ -144,10 +144,10 @@ const IndexProduct = () => {
         </div>
         {products.map((product) => (
           <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow" key={product.iiId}>
-            <div className="w-1/5 p-2 cell">{product.viTitle}</div>
+            <div className="w-1/5 p-2 cell">{product.RoleDescription}</div>
             <div className="w-1/5 p-2 cell"><img src={product.viImage} alt={product.viTitle} /></div>
             <div className="w-1/5 p-2 cell">Category</div>
-            <div className="w-1/5 p-2 cell">{product.dateCreated}</div>
+            <div className="w-1/5 p-2 cell">{product.RoleName}</div>
             <div className="w-1/5 p-2 cell">Active</div>
             <div className="p-2 cell w-1/10">
               <Link to={`/admin/createProduct?id=${product.iiId}`}>Edit</Link>

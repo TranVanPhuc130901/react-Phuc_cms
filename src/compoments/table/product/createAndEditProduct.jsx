@@ -23,35 +23,38 @@ const CreateAndEditProduct = ( ) => {
     const [isNew, setIsNew] = useState(!id);
     const [formData, setFormData] = useState({
         productApp: "product",
-        productName: "",
-        productDescription: "",
-        productSku: "",
-        productPriceOld: "",
-        productPriceNew: "",
-        productDate: "",
-        productQuantity: "",
-        productImage: "",
-        productOrder: "",
-        productContent: "",
-        productUrl: "",
-        productMetaTitle: "",
-        productMetaDescription: "",
-        productMetaKeyword: "",
-        productTag: "",
-        productParam: "",
-        toggleStates: {
-            txtStatus: 0,
-            txtBusiness: 0,
-            txtOther: 0,
-        },
-        productAssetImage:"",
+        // productName: "",
+        // productDescription: "",
+        // productSku: "",
+        // productPriceOld: "",
+        // productPriceNew: "",
+        // productDate: "",
+        // productQuantity: "",
+        // productImage: "",
+        // productOrder: "",
+        // productContent: "",
+        // productUrl: "",
+        // productMetaTitle: "",
+        // productMetaDescription: "",
+        // productMetaKeyword: "",
+        // productTag: "",
+        // productParam: "",
+        // toggleStates: {
+        //     txtStatus: 0,
+        //     txtBusiness: 0,
+        //     txtOther: 0,
+        // },
+        // productAssetImage:"",
+        PostTitle: "",
+        PostDescription: "",
+        PostImage: "",
+        PostContent: "",
     });
     useEffect(() => {
         const fetchData = async () => {
           // Kiểm tra xem có tồn tại id từ URL không để xác định trạng thái là insert hay update
           if (id) {
             setEditingMode(true);
-    
             try {
               // Thực hiện lấy dữ liệu từ API hoặc bất kỳ nguồn dữ liệu nào khác để điền vào form
               let dataProduct = await productService.getAllProducts(id,"","");
@@ -124,7 +127,7 @@ const handleEditorContentChange = (newContent) => {
     // Cập nhật trạng thái formData nếu cần:
     setFormData({
         ...formData,
-        productParam: newContent,
+        PostContent: newContent,
       });
   };
 const handleToggle = (id, status) => {
@@ -138,7 +141,7 @@ const handleToggle = (id, status) => {
     // Update the imageData state with the new imageUrl and assetId
     setFormData({
         ...formData,
-        productImage: imageUrl,
+        PostImage: imageUrl,
         productAssetImage: assetId,
       });
       console.log(formData);
@@ -197,8 +200,8 @@ const handleToggle = (id, status) => {
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     type="text" 
                                     id="txtName"
-                                    value={formData.productName}
-                                    onChange={(e) => handleChange("productName", e.target.value)}
+                                    value={formData.PostTitle}
+                                    onChange={(e) => handleChange("PostTitle", e.target.value)}
                                 />
                             </div>
                         </div>
@@ -209,13 +212,13 @@ const handleToggle = (id, status) => {
                                     className="w-full p-2 rounded-[8px] border-[#ced4da]" 
                                     placeholder="Mô tả"
                                     id="txtDescription"
-                                    value={formData.productDescription}
+                                    value={formData.PostDescription}
                                     rows={4}
-                                    onChange={(e) => handleChange("productDescription", e.target.value)}
+                                    onChange={(e) => handleChange("PostDescription", e.target.value)}
                                 />   
                             </div>
                         </div>
-                        <div className="flex gap-[10px]">
+                        {/* <div className="flex gap-[10px]">
                             <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
                                 <label className="font-bold text-xl">SKU</label>
                                 <div className="w-full">
@@ -259,9 +262,9 @@ const handleToggle = (id, status) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <UploadImageBox urlOld={formData.productImage} onImageUpload={handleImageUpload} isNew={isNew} assetIdOld={formData.productAssetImage}/>
-                        <div className="flex gap-[10px]">
+                        </div> */}
+                        <UploadImageBox urlOld={formData.PostImage} onImageUpload={handleImageUpload} isNew={isNew} assetIdOld={formData.productAssetImage}/>
+                        {/* <div className="flex gap-[10px]">
                             <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
                                 <label className="font-bold text-xl">Ngày đăng</label>
                                 <div className="w-full">
@@ -315,17 +318,17 @@ const handleToggle = (id, status) => {
                                 idInput="txtOther"
                                 onToggle={(status) => handleToggle("txtOther", status)}
                             />
-                        </div>
+                        </div> */}
                         <legend className="font-bold text-xl">Mô tả chi tiết</legend>
                         <div className="form-group">
                             {/* <MyEditorProvider> */}
                                 <div className="">
-                                    <MyEditor onContentChange={(newContent) => handleEditorContentChange(newContent)} contentOld={formData.productParam}/>
+                                    <MyEditor onContentChange={(newContent) => handleEditorContentChange(newContent)} contentOld={formData.PostContent}/>
                                 </div>
                             {/* </MyEditorProvider> */}
                         </div>
                         <legend className="font-bold text-xl">Tối ưu cho công cụ tìm kiếm</legend>
-                        <div className="flex flex-col gap-3">
+                        {/* <div className="flex flex-col gap-3">
                             <label className="font-bold text-xl">URL <span></span></label>
                             <div className="w-full">
                                 <input 
@@ -388,7 +391,7 @@ const handleToggle = (id, status) => {
                                     onChange={(e) => handleChange("productTag",e.target.value)}
                                 />
                             </div>
-                        </div>
+                        </div> */}
                         <div className="flex flex-col gap-3">
                         <div className="col-md-10 col-md-offset-2">
                             <button

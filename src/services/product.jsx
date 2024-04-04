@@ -3,10 +3,13 @@ const productService = {
     getAllProducts: async (id, pageSize, pageNumber) => {
       try {
         const params = { id, pageSize, pageNumber };
-        const response = await axios.get('http://localhost:8989/api/get-items', {
+        const response = await axios.get('http://localhost:3000/api/role/', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+          },
           params,
         });
-  
+  console.log(response);
         return response.data;
       } catch (error) {
         console.error('Error fetching data:', error.message);
@@ -16,7 +19,12 @@ const productService = {
   
     insertProduct: async(data) => {
       try {
-          const response = await axios.post('http://localhost:8989/api/create-item', data);
+          const response = await axios.post('http://localhost:3000/api/post/addPost', {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+            },
+            data
+          });
           return response.data;
       } catch (error) {
           throw error;

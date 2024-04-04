@@ -10,9 +10,9 @@ export function uploadAdapter(loader) {
           const file = await loader.file;
           const response = await axios.request({
             method: 'POST',
-            url: `http://localhost:8989/api/upload-files`,
+            url: `http://localhost:3000/api/image/addImage`,
             data: {
-              files: file,
+              image: file,
             },
             headers: {
               'Content-Type': 'multipart/form-data',

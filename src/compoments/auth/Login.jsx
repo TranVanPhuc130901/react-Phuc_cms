@@ -33,16 +33,15 @@ const LoginForm = () => {
  // Chờ promise hoàn thành trước khi sử dụng
     if (data.StatusCode === 1) {
       localStorage.setItem('authToken', data.AccessToken); // Example
+      localStorage.setItem('authRsToken', data.RefreshToken);
 
       // 2. Redirect to admin page using useNavigate
       navigate('/admin');
+    } else {
+      console.log(data.StatusCode)
+
+      alert("Đăng nhập thất bại")
     }
-
-    console.log(data.StatusCode)
-
-    alert("Đăng nhập thất bại")
-
-    
   };
 
   return (

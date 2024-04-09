@@ -3,8 +3,8 @@ import axios from 'axios';
 const userService = {
     getAllUsers: async() => {
         try {
-            const response = await axios.get('http://localhost:8989/api/get-user');
-            return response.data;
+            const response = await axios.get('http://localhost:3000/api/user');
+            return response.data.users;
         } catch (error) {
             throw error;
         }

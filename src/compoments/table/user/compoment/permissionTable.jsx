@@ -12,6 +12,7 @@ const[roleActive, setRoleActive] = useState(false);
     const fetchData = async () => {
       try {
         const data = await roleService.getAllGroupsAndRoles();
+       
         setPermission(data.roles);
       } catch (error) {
         console.error('Error fetching data:', error.message);
@@ -64,15 +65,15 @@ const[roleActive, setRoleActive] = useState(false);
         <tbody>
           {permissions.map((permission) => (
             <tr
-              key={permission.PermissionId}
+              key={permission._id}
               className={`cursor-pointer`}
-              id={permission.PermissionId}
+              id={permission._id}
               onDoubleClick={() => handlePermissionClick(permission.PermissionId)}
             >
-              <td className="py-2 px-4 border-b">{permission.PermissionName}</td>
-              <td className="py-2 px-4 border-b">{permission.PermissionDescription}</td>
+              <td className="py-2 px-4 border-b">{permission.RoleName}</td>
+              <td className="py-2 px-4 border-b">{permission.RoleDescription}</td>
               <td className="py-2 px-4 border-b">
-                <input type="checkbox" value={permission.PermissionId} />
+                <input type="checkbox" value={permission._id} />
               </td>
             </tr>
           ))}
@@ -80,7 +81,7 @@ const[roleActive, setRoleActive] = useState(false);
       </table>
       <button>Lưu</button>
     </div>
-      <RoleTable isStatus={roleActive} onToggleRoleTable={handleToggleRoleTable} selectedPermissionData={selectedPermissionData} selectedPermissionId={selectedPermissionId} />
+      {/* <RoleTable isStatus={roleActive} onToggleRoleTable={handleToggleRoleTable} selectedPermissionData={selectedPermissionData} selectedPermissionId={selectedPermissionId} /> */}
   </div>)
   );
 };

@@ -1,10 +1,46 @@
 
 import PermissionTable from './compoment/permissionTable';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CreateAndEditUser = ( ) => {
+
+    const [user, setUser] = useState({
+        UserName: '',
+        FirstName: '',
+        LastName: '',
+        Address: '',
+        PhoneNumber: '',
+        Email: ''
+    });
+
+
     const [selectedUserRole, setSelectedUserRole] = useState(false);
+    // gọi api lấy dataUser
+
+    useEffect(() => {
+        // Lấy id từ query params của URL
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const id = urlParams.get('id');
+
+        console.log(id);
+
+        // Gọi API getUserById với id từ query params
+        fetch(`http://localhost:3000/api/user?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                // Cập nhật state user với dữ liệu từ API
+                setUser(data.users[0]);
+                console.log(data.users)
+            })
+            .catch(error => console.error('Error fetching user:', error));
+    }, []);
+
+
+
+
     const handlePermissionClick = () => {
+        console.log(user)
         // Toggle the selectedPermission state when clicking on a permission
        setSelectedUserRole(!selectedUserRole);
       };
@@ -16,35 +52,36 @@ const CreateAndEditUser = ( ) => {
                     <div className="flex flex-col gap-3">
                         <label className="font-bold text-xl"> <span>Account</span></label>
                         <div className="w-full">
-                            <input className="w-full p-2 rounded-[8px] border-[#ced4da]" type="text"  id="txtName"/>
+                            <input className="w-full p-2 rounded-[8px] border-[#ced4da]" type="text"  id="txtName" value={user.UserName}/>
                         </div>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <label className="font-bold text-xl">FirstName<span></span></label>
+                        <label className="font-bold text-xl">UserDescription<span></span></label>
                         <div className="w-full">
-                            <textarea className="w-full p-2 rounded-[8px] border-[#ced4da]" placeholder="Mô tả" id="txtFirstName" rows={4} />   
+                            <textarea className="w-full p-2 rounded-[8px] border-[#ced4da]" placeholder="Mô tả" id="txtFirstName" rows={4} value={user.UserDescription} />   
                         </div>
                     </div>
                     <div className="flex gap-[10px]">
                         <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">LastName</label>
+                            <label className="font-bold text-xl">Avatar</label>
                             <div className="w-full">
-                                <input type="text" placeholder="SKU" id="txtLastName" className="w-full p-2 rounded-[8px] border-[#ced4da]"/>
+                                <input type="file" placeholder="SKU" id="txtLastName" className="w-full p-2 rounded-[8px] border-[#ced4da]"/>
                             </div>
+                            <img src={user.UserAvatar} alt="" />
                         </div>
                         <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">Address</label>
+                            <label className="font-bold text-xl">UserEmail</label>
                             <div className="col-md-2">
                                 <div className="w-full">
-                                    <input type="text" placeholder="Giá niêm yết" id="txtAddress" className="w-full p-2 rounded-[8px] border-[#ced4da]" />
+                                    <input type="text" placeholder="Giá niêm yết" id="txtAddress" className="w-full p-2 rounded-[8px] border-[#ced4da]" value={user.UserEmail}/>
                                 </div>
                             </div>
                         </div>
                         <div className="flex flex-col gap-3 w-[calc((100%-20px)/3)]">
-                            <label className="font-bold text-xl">PhoneNumber</label>
+                            <label className="font-bold text-xl">UserStatus</label>
                             <div className="col-md-2">
                                 <div className="w-full">
-                                    <input type="number" placeholder="Giá khuyến mãi" id="txtPhoneNumber" className="w-full p-2 rounded-[8px] border-[#ced4da]" />
+                                    <input type="number" placeholder="Giá khuyến mãi" id="txtPhoneNumber" className="w-full p-2 rounded-[8px] border-[#ced4da]" value={user.UserStatus} />
                                 </div>
                             </div>
                         </div>
@@ -72,7 +109,7 @@ const CreateAndEditUser = ( ) => {
             </div>
         </form>
 
-        <PermissionTable isStatus={selectedUserRole} activeFormPermission={handlePermissionClick}/>
+            <PermissionTable isStatus={selectedUserRole} activeFormPermission={handlePermissionClick}/>
         </div>
     )
 }

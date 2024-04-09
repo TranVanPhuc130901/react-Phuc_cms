@@ -13,7 +13,7 @@ const IndexUser = () => {
         // Call your API function here
         const data = await userService.getAllUsers();
         console.log(data);
-        setUsers(data.users);
+        setUsers(data);
          // Assuming your API response contains the products
       } catch (error) {
         console.error('Error fetching data:', error.message);
@@ -37,13 +37,16 @@ const IndexUser = () => {
           </div>
         </div>
         {users.map((user) => (
-          <div className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
-            <div className="w-1/5 p-2 cell">{user.vuAccount}</div>
-            <div className="w-1/5 p-2 cell">{user.vuEmail}</div>
-            <div className="w-1/5 p-2 cell">{user.duDateCreated}</div>
-            <div className="w-1/5 p-2 cell">{user.iuStatus}</div>
+          <div key={user._id} className="flex items-center justify-between px-4 py-8 mb-4 text-center cursor-pointer row custom-shadow">
+            <div className="w-1/5 p-2 cell">{user.UserName}</div>
+            <div className="w-1/5 p-2 cell">
+              <img src={user.UserAvatar} alt="" />
+            </div>
+            <div className="w-1/5 p-2 cell">{user.UserEmail}</div>
+            <div className="w-1/5 p-2 cell">{user.createdAt}</div>
+            <div className="w-1/5 p-2 cell">{user.UserStatus}</div>
             <div className="p-2 cell w-1/10 flex items-center gap-2">
-                <span title='Edit Item'><i className='iconsminds-brush'></i></span>
+            <a href={`/admin/createUser?id=${user._id}`} title='Edit Item'><i className='iconsminds-brush'></i></a>
                 <span title='Delete Item'><i className='iconsminds-delete-file'></i></span>
                 <span title='Duplicate Item'><i className='iconsminds-duplicate-layer'></i></span>
             </div>

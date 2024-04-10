@@ -46,7 +46,7 @@ const IndexUser = () => {
             <div className="w-1/5 p-2 cell">{user.createdAt}</div>
             <div className="w-1/5 p-2 cell">{user.UserStatus}</div>
             <div className="p-2 cell w-1/10 flex items-center gap-2">
-            <a href={`/admin/createUser?id=${user._id}`} title='Edit Item'><i className='iconsminds-brush'></i></a>
+            <a href={`/admin/createUser?idUser=${user._id}`} title='Edit Item'><i className='iconsminds-brush'></i></a>
                 <span title='Delete Item'><i className='iconsminds-delete-file'></i></span>
                 <span title='Duplicate Item'><i className='iconsminds-duplicate-layer'></i></span>
             </div>
